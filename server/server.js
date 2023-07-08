@@ -23,7 +23,7 @@ app.get('/api', async (req, res) => {
       NUMBER_KILLED: {
         $gte: 1,
       },
-    });
+    }).select('-_id');
     console.log(results);
     res.json(results);
   } catch (error) {

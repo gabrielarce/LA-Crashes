@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon } from 'leaflet';
 import Sidebar from './Sidebar';
+import PopupTable from './PopupTable';
 import 'leaflet/dist/leaflet.css';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 
@@ -11,7 +12,7 @@ function Map() {
     fetch('/api')
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log('and i ran, i ran so far away');
         setCrashes(data);
       });
   }, []);
@@ -38,11 +39,14 @@ function Map() {
           {' '}
           {crashes &&
             crashes.map((crash) => (
-              <Marker position={crash.geocode} icon={crashIcon}>
+              <Marker
+                position={[crash.POINT_Y, crash.POINT_X]}
+                icon={crashIcon}
+              >
                 {' '}
                 <Popup>
                   {' '}
-                  {crash.COLLISION_DATE + ' ' + crash.collision_time}{' '}
+                  <PopupTable data={crash} />{' '}
                 </Popup>{' '}
               </Marker>
             ))}{' '}

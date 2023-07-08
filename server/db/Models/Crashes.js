@@ -22,7 +22,7 @@ const crashSchema = new mongoose.Schema(
     POINT_X: { type: Number, double: true, require: true },
     POINT_Y: { type: Number, double: true, require: true },
   },
-  { collection: 'Crashes' }
+  { collection: 'crashes' }
 );
 
-module.exports = mongoose.model('Crash', crashSchema);
+module.exports = mongoose.model('crash', crashSchema);
