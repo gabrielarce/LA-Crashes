@@ -12,13 +12,13 @@ function Map() {
     fetch('/api')
       .then((response) => response.json())
       .then((data) => {
-        console.log('and i ran, i ran so far away');
         setCrashes(data);
       });
   }, []);
 
   const crashIcon = new Icon({
-    iconUrl: 'https://cdn-icons-png.flaticon.com/512/5111/5111178.png ',
+    iconUrl:
+      'https://www.freepnglogos.com/uploads/dot-png/file-red-dot-svg-wikimedia-commons-23.png', //'https://cdn-icons-png.flaticon.com/512/5111/5111178.png ',
     iconSize: [10, 10],
   });
 
