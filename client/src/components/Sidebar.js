@@ -1,7 +1,24 @@
 import { useState } from 'react';
 
-export default function Sidebar() {
+export default function Sidebar({ crashes, setFiltered }) {
   const [open, setOpen] = useState(false);
+
+  const handleFilterChange = async () => {
+    // Implement your filter logic here
+    // Fetch filtered data from the API or manipulate the existing crashes data
+    // For simplicity, let's assume the filteredCrashes is the filtered data
+    const filteredCrashes = await crashes.filter(
+      (crash) => crash.ALCOHOL_INVOLVED === 'Y'
+    );
+    console.log('handleFilterChange function called');
+    // Call the callback function to update the crashes data in Map component
+    setFiltered(filteredCrashes);
+  };
+
+  const handleReset = () => {
+    setFiltered(crashes);
+  };
+
   return (
     <div className="flex">
       <div
@@ -11,7 +28,7 @@ export default function Sidebar() {
       >
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-white"> Dashboard </h2>{' '}
+            <h2 className="text-xl font-bold text-white"> Filter </h2>{' '}
             <button onClick={() => setOpen(!open)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -29,40 +46,11 @@ export default function Sidebar() {
               </svg>{' '}
             </button>{' '}
           </div>{' '}
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 flex items-center py-4">
-              <button
-                type="submit"
-                className="p-2 focus:outline-none focus:ring"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>{' '}
-              </button>{' '}
-            </span>{' '}
-            <input
-              type="search"
-              name="Search"
-              placeholder="Search..."
-              className="w-full py-2 pl-10 text-sm rounded-md focus:outline-none"
-            />
-          </div>{' '}
           <div className="flex-1">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
               <li className="rounded-sm">
-                <a
-                  href="#"
+                <button
+                  onClick={handleFilterChange}
                   className="flex items-center p-2 space-x-3 rounded-md"
                 >
                   <svg
@@ -76,11 +64,11 @@ export default function Sidebar() {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                      d="M 3,0 C 2,0 2,0.4670568 2,1 L 2,3 C 2,4 0,4 0,6 l 0,7 c 0,0.566252 0.467057,1 1,1 l 4,0 c 0.599561,0 1,-0.400439 1,-1 L 6,6 C 6,4 4,4 4,3 L 4,1 C 4,0.4337479 4,0 3,0 z m 4,5 c 0,3 0.47106,5 3,5 l 0,2 c 0,0.666911 -1,1 -1.5,1 -1,0 -1.5,0 -1.5,1 l 7,0 C 14,13 13.5,13 12.5,13 12,13 11,12.633602 11,12 l 0,-2 c 2.47106,0 3,-2 3,-5 L 7,5 z"
                     />
                   </svg>{' '}
-                  <span className="text-gray-100"> Home </span>{' '}
-                </a>{' '}
+                  <span className="text-gray-100"> Alcohol Involved </span>{' '}
+                </button>{' '}
               </li>{' '}
               <li className="rounded-sm">
                 <a
@@ -154,8 +142,8 @@ export default function Sidebar() {
                 </a>{' '}
               </li>{' '}
               <li className="rounded-sm">
-                <a
-                  href="#"
+                <button
+                  onClick={handleReset}
                   className="flex items-center p-2 space-x-3 rounded-md"
                 >
                   <svg
@@ -172,8 +160,8 @@ export default function Sidebar() {
                       d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                     />
                   </svg>{' '}
-                  <span className="text-gray-100"> Logout </span>{' '}
-                </a>{' '}
+                  <span className="text-gray-100"> Reset </span>{' '}
+                </button>{' '}
               </li>{' '}
             </ul>{' '}
           </div>{' '}

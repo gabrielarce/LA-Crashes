@@ -8,11 +8,14 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 
 function Map() {
   const [crashes, setCrashes] = useState([]);
+  const [filtered, setFiltered] = useState(crashes);
+
   useEffect(() => {
     fetch('/api')
       .then((response) => response.json())
       .then((data) => {
         setCrashes(data);
+        setFiltered(data);
       });
   }, []);
 
@@ -22,9 +25,11 @@ function Map() {
     iconSize: [10, 10],
   });
 
+  console.log(filtered);
+
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar crashes={crashes} setFiltered={setFiltered} />{' '}
       <MapContainer
         center={[34.173111, -118.457062]} // Set the initial map center coordinates
         zoom={10} // Set the initial map zoom level
@@ -37,8 +42,8 @@ function Map() {
         {/* Add additional map layers, markers, and other components as needed */}{' '}
         <MarkerClusterGroup>
           {' '}
-          {crashes &&
-            crashes.map((crash) => (
+          {filtered &&
+            filtered.map((crash) => (
               <Marker
                 position={[crash.POINT_Y, crash.POINT_X]}
                 icon={crashIcon}
