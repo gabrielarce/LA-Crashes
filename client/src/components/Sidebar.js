@@ -7,7 +7,7 @@ export default function Sidebar({ crashes, setFiltered }) {
     // Implement your filter logic here
     // Fetch filtered data from the API or manipulate the existing crashes data
     // For simplicity, let's assume the filteredCrashes is the filtered data
-    const filteredCrashes = await crashes.filter(
+    const filteredCrashes = crashes.filter(
       (crash) => crash.ALCOHOL_INVOLVED === 'Y'
     );
     console.log('handleFilterChange function called');
