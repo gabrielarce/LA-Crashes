@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { LiaBeerSolid } from 'react-icons/fa';
 
 export default function Sidebar({ crashes, setFiltered }) {
   const [open, setOpen] = useState(false);
@@ -61,11 +62,7 @@ export default function Sidebar({ crashes, setFiltered }) {
                     stroke="currentColor"
                     strokeWidth={2}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M 3,0 C 2,0 2,0.4670568 2,1 L 2,3 C 2,4 0,4 0,6 l 0,7 c 0,0.566252 0.467057,1 1,1 l 4,0 c 0.599561,0 1,-0.400439 1,-1 L 6,6 C 6,4 4,4 4,3 L 4,1 C 4,0.4337479 4,0 3,0 z m 4,5 c 0,3 0.47106,5 3,5 l 0,2 c 0,0.666911 -1,1 -1.5,1 -1,0 -1.5,0 -1.5,1 l 7,0 C 14,13 13.5,13 12.5,13 12,13 11,12.633602 11,12 l 0,-2 c 2.47106,0 3,-2 3,-5 L 7,5 z"
-                    />
+                    <path d="M32 64c0-17.7 14.3-32 32-32H352c17.7 0 32 14.3 32 32V96h51.2c42.4 0 76.8 34.4 76.8 76.8V274.9c0 30.4-17.9 57.9-45.6 70.2L384 381.7V416c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V64zM384 311.6l56.4-25.1c4.6-2.1 7.6-6.6 7.6-11.7V172.8c0-7.1-5.7-12.8-12.8-12.8H384V311.6zM160 144c0-8.8-7.2-16-16-16s-16 7.2-16 16V368c0 8.8 7.2 16 16 16s16-7.2 16-16V144zm64 0c0-8.8-7.2-16-16-16s-16 7.2-16 16V368c0 8.8 7.2 16 16 16s16-7.2 16-16V144zm64 0c0-8.8-7.2-16-16-16s-16 7.2-16 16V368c0 8.8 7.2 16 16 16s16-7.2 16-16V144z" />
                   </svg>{' '}
                   <span className="text-gray-100"> Alcohol Involved </span>{' '}
                 </button>{' '}
