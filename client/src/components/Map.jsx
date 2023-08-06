@@ -89,6 +89,7 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 function Map() {
   const mapRef = useRef(null);
   const [center, setCenter] = useState([34.173111, -118.457062]);
+  const [zoomLevel, setZoomLevel] = useState(10);
   const [crashes, setCrashes] = useState([]);
   const [filtered, setFiltered] = useState(crashes);
 
@@ -116,14 +117,19 @@ function Map() {
     setCenter([POINT_Y, POINT_X]); // Update the state with the clicked marker's coordinates
 
     if (mapRef.current) {
-      mapRef.current.setView([POINT_Y, POINT_X], 18); // Set the map view to the clicked marker's position and adjust the zoom level (here, 15) as per your preference
+      const currentZoomLevel = mapRef.current.getZoom();
+      console.log('Current Zoom Level:', currentZoomLevel);
+
+      if (currentZoomLevel < 13) {
+        mapRef.current.setView([POINT_Y, POINT_X], 15); // Set the map view to the clicked marker's position and adjust the zoom level (here, 15) as per your preference
+      }
     }
   };
 
-  const crashIcon = new Icon({
+  const fatalIcon = new Icon({
     iconUrl:
-      'https://www.freepnglogos.com/uploads/dot-png/file-red-dot-svg-wikimedia-commons-23.png', //'https://cdn-icons-png.flaticon.com/512/5111/5111178.png ',
-    iconSize: [10, 10],
+      'https://www.freepnglogos.com/uploads/dot-png/file-red-dot-svg-wikimedia-commons-23.png',
+    iconSize: [11, 11],
   });
 
   return (
@@ -131,7 +137,7 @@ function Map() {
       <Sidebar crashes={crashes} setFiltered={setFiltered} />
       <MapContainer
         center={center}
-        zoom={10}
+        zoom={zoomLevel}
         style={{ height: '100vh', width: '100%' }}
         ref={mapRef}
       >
@@ -139,13 +145,13 @@ function Map() {
           url={`https://tile.jawg.io/jawg-streets/{z}/{x}/{y}{r}.png?access-token=${process.env.REACT_APP_TL_ACCESS_KEY}`}
           attribution="Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors"
         />
-        <MarkerClusterGroup maxClusterRadius={50}>
+        <MarkerClusterGroup maxClusterRadius={35}>
           {filtered &&
             filtered.map((crash, index) => (
               <Marker
                 key={index}
                 position={[crash.POINT_Y, crash.POINT_X]}
-                icon={crashIcon}
+                icon={fatalIcon}
                 eventHandlers={{
                   click: () => handleMarkerClick(crash),
                 }}

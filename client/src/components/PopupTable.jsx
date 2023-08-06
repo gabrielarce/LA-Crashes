@@ -22,6 +22,10 @@ const dayOfWeek = (day) => {
 };
 
 function convertToAmPmTime(militaryTime) {
+  if (militaryTime === undefined) {
+    return 'Time not recorded';
+  }
+
   let [hours, minutes] = militaryTime.split(':').map(Number);
   let period = 'AM';
 
@@ -31,7 +35,6 @@ function convertToAmPmTime(militaryTime) {
       hours -= 12;
     }
   }
-
   return `${hours}:${String(minutes).padStart(2, '0')} ${period}`;
 }
 

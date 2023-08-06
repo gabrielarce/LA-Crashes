@@ -20,11 +20,14 @@ app.get('/api', async (req, res) => {
   try {
     // Execute a simple query to check the connection
     let results = await Crash.find({
-      NUMBER_KILLED: {
-        $gte: 1,
+      // NUMBER_KILLED: {
+      //   $gte: 1,
+      // },
+      COLLISION_SEVERITY: {
+        $in: [1, 2],
       },
     }).select('-_id');
-    console.log(results);
+    console.log(results.length);
     res.json(results);
   } catch (error) {
     console.error('Error connecting to the database:', error);
