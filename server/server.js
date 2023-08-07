@@ -27,7 +27,6 @@ app.get('/api', async (req, res) => {
         $in: [1, 2],
       },
     }).select('-_id');
-    console.log(results.length);
     res.json(results);
   } catch (error) {
     console.error('Error connecting to the database:', error);
