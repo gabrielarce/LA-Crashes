@@ -48,7 +48,7 @@ function Map() {
 
   const severeIcon = new Icon({
     iconUrl:
-      'https://imagedelivery.net/5MYSbk45M80qAwecrlKzdQ/87718c71-767b-44fc-ea75-6afe5dc32600/preview',
+      'https://www.freepnglogos.com/uploads/dot-png/blue-dot-clip-art-clkerm-vector-clip-art-online-20.png',
     iconSize: [11, 11],
   });
 
