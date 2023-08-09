@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaBeer, FaRoad } from 'react-icons/fa';
+import Legend from './Legend';
 
 export default function Sidebar({ crashes, setFiltered }) {
   const [open, setOpen] = useState(false);
@@ -25,7 +26,7 @@ export default function Sidebar({ crashes, setFiltered }) {
       <div
         className={` ${
           open ? 'w-40' : 'w-60 '
-        } flex flex-col h-full p-3 bg-gray-800 shadow duration-300`}
+        } flex flex-col justify-between h-full p-3 bg-gray-800 shadow duration-300`}
       >
         <div className="space-y-3">
           <div className="flex items-center justify-between">
@@ -154,6 +155,7 @@ export default function Sidebar({ crashes, setFiltered }) {
             </ul>{' '}
           </div>{' '}
         </div>{' '}
+        <Legend />
       </div>{' '}
     </div>
   );

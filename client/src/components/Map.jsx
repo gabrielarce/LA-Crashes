@@ -5,6 +5,7 @@ import Sidebar from './Sidebar';
 import PopupTable from './PopupTable';
 import 'leaflet/dist/leaflet.css';
 import MarkerClusterGroup from 'react-leaflet-cluster';
+import FadeLoader from 'react-spinners/FadeLoader';
 
 function Map() {
   const mapRef = useRef(null);
@@ -12,6 +13,7 @@ function Map() {
   const [zoomLevel, setZoomLevel] = useState(10);
   const [crashes, setCrashes] = useState([]);
   const [filtered, setFiltered] = useState(crashes);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api')
@@ -19,6 +21,7 @@ function Map() {
       .then((data) => {
         setCrashes(data);
         setFiltered(data);
+        setIsLoading(false);
       });
   }, []);
 
@@ -40,16 +43,20 @@ function Map() {
     }
   };
 
+  const iconSelector = (crash) => {
+    return crash['COLLISION_SEVERITY'] == 1 ? fatalIcon : severeIcon;
+  };
+
   const fatalIcon = new Icon({
     iconUrl:
       'https://www.freepnglogos.com/uploads/dot-png/file-red-dot-svg-wikimedia-commons-23.png',
-    iconSize: [11, 11],
+    iconSize: [12, 12],
   });
 
   const severeIcon = new Icon({
     iconUrl:
       'https://www.freepnglogos.com/uploads/dot-png/blue-dot-clip-art-clkerm-vector-clip-art-online-20.png',
-    iconSize: [11, 11],
+    iconSize: [12, 12],
   });
 
   return (
@@ -71,7 +78,7 @@ function Map() {
               <Marker
                 key={index}
                 position={[crash.POINT_Y, crash.POINT_X]}
-                icon={crash.COLLISION_SEVERITY === 1 ? fatalIcon : severeIcon}
+                icon={iconSelector(crash)}
                 eventHandlers={{
                   click: () =>
                     mapRef.current && mapRef.current.getZoom() < 13
