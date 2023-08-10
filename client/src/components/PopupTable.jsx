@@ -25,10 +25,8 @@ function convertToAmPmTime(militaryTime) {
   if (militaryTime === undefined) {
     return 'Time not recorded';
   }
-
   let [hours, minutes] = militaryTime.split(':').map(Number);
   let period = 'AM';
-
   if (hours >= 12) {
     period = 'PM';
     if (hours > 12) {

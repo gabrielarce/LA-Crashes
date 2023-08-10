@@ -1,18 +1,16 @@
 import { useState } from 'react';
-import { FaBeer, FaRoad } from 'react-icons/fa';
+import { FaBeer } from 'react-icons/fa';
+import { FcFilledFilter } from 'react-icons/fc';
 import Legend from './Legend';
 
 export default function Sidebar({ crashes, setFiltered }) {
   const [open, setOpen] = useState(false);
 
   const handleFilterChange = async () => {
-    // Implement your filter logic here
-    // Fetch filtered data from the API or manipulate the existing crashes data
-    // For simplicity, let's assume the filteredCrashes is the filtered data
+    // Implement  filter logic.
     const filteredCrashes = crashes.filter(
       (crash) => crash.ALCOHOL_INVOLVED === 'Y'
     );
-    console.log('handleFilterChange function called');
     // Call the callback function to update the crashes data in Map component
     setFiltered(filteredCrashes);
   };
@@ -30,7 +28,10 @@ export default function Sidebar({ crashes, setFiltered }) {
       >
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-white"> Filter </h2>{' '}
+            <h2 className="text-xl font-bold text-white">
+              Filter Data
+              <FcFilledFilter />
+            </h2>{' '}
             <button onClick={() => setOpen(!open)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
