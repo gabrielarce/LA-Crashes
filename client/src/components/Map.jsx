@@ -21,18 +21,8 @@ function Map() {
       .then((data) => {
         setCrashes(data);
         setFiltered(data);
-        setIsLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    // This useEffect will be triggered once when the component mounts
-    if (crashes.length > 0 && mapRef.current) {
-      // Check if crashes data is available and the mapRef is ready
-      const { POINT_Y, POINT_X } = crashes[0]; // Get the latitude and longitude of the first marker (you can change this logic if needed)
-      setCenter([POINT_Y, POINT_X]); // Update the state with the first marker's coordinates
-      mapRef.current.setView([POINT_Y, POINT_X], 15); // Set the map view to the first marker's position and adjust the zoom level (here, 15) as per your preference
-    }
+      })
+      .then(() => setIsLoading(false));
   }, []);
 
   const handleMarkerClick = (crash) => {
@@ -44,7 +34,7 @@ function Map() {
   };
 
   const iconSelector = (crash) => {
-    return crash['COLLISION_SEVERITY'] == 1 ? fatalIcon : severeIcon;
+    return crash['COLLISION_SEVERITY'] === 1 ? fatalIcon : severeIcon;
   };
 
   const fatalIcon = new Icon({
@@ -72,29 +62,35 @@ function Map() {
           url={`https://tile.jawg.io/jawg-streets/{z}/{x}/{y}{r}.png?access-token=${process.env.REACT_APP_TL_ACCESS_KEY}`}
           attribution="Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors"
         />
-        <MarkerClusterGroup maxClusterRadius={40}>
-          {filtered &&
-            filtered.map((crash, index) => (
-              <Marker
-                key={index}
-                position={[crash.POINT_Y, crash.POINT_X]}
-                icon={iconSelector(crash)}
-                eventHandlers={{
-                  click: () =>
-                    mapRef.current && mapRef.current.getZoom() < 13
-                      ? handleMarkerClick(crash)
-                      : null,
-                }}
-              >
-                <Popup>
-                  <PopupTable data={crash} />
-                </Popup>
-              </Marker>
-            ))}
-        </MarkerClusterGroup>
+        {/* Conditionally render Loading component while data is loading */}
+        {isLoading ? (
+          <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80 transition-opacity duration-700 ease-in-out pointer-events-none">
+            <FadeLoader color="#36d7b7" />
+          </div>
+        ) : (
+          <MarkerClusterGroup maxClusterRadius={45}>
+            {filtered &&
+              filtered.map((crash, index) => (
+                <Marker
+                  key={index}
+                  position={[crash.POINT_Y, crash.POINT_X]}
+                  icon={iconSelector(crash)}
+                  eventHandlers={{
+                    click: () =>
+                      mapRef.current && mapRef.current.getZoom() < 13
+                        ? handleMarkerClick(crash)
+                        : null,
+                  }}
+                >
+                  <Popup>
+                    <PopupTable data={crash} />
+                  </Popup>
+                </Marker>
+              ))}
+          </MarkerClusterGroup>
+        )}
       </MapContainer>
     </div>
   );
 }
-
 export default Map;
