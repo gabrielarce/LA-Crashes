@@ -22,10 +22,11 @@ app.get('/api', async (req, res) => {
       // NUMBER_KILLED: {
       //   $gte: 1,
       // },
-      COLLISION_SEVERITY: {
+      collision_severity: {
         $in: [1, 2],
       },
     }).select('-_id');
+    console.log(results);
     res.json(results);
   } catch (error) {
     console.error('Error connecting to the database:', error);
