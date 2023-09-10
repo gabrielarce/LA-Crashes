@@ -35,8 +35,7 @@ export default function Header() {
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   href="#pablo"
                 >
-                  <i className="fab fa-facebook-square text-lg leading-lg text-white opacity-75"></i>
-                  <span className="ml-2">Share</span>
+                  <span className="ml-2">About App</span>
                 </a>
               </li>
               <li className="nav-item">
@@ -44,8 +43,7 @@ export default function Header() {
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   href="#pablo"
                 >
-                  <i className="fab fa-twitter text-lg leading-lg text-white opacity-75"></i>
-                  <span className="ml-2">Tweet</span>
+                  <span className="ml-2">Statistics</span>
                 </a>
               </li>
               <li className="nav-item">
@@ -53,8 +51,7 @@ export default function Header() {
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                   href="#pablo"
                 >
-                  <i className="fab fa-pinterest text-lg leading-lg text-white opacity-75"></i>
-                  <span className="ml-2">Pin</span>
+                  <span className="ml-2">Take Action</span>
                 </a>
               </li>
             </ul>

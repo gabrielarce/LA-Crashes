@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon } from 'leaflet';
-import Sidebar from './Sidebar';
+import Modal from './Modal';
 import Legend from './Legend';
 import PopupTable from './PopupTable';
 import 'leaflet/dist/leaflet.css';
@@ -54,6 +54,13 @@ function Map() {
     <div className="relative h-full w-full">
       {/* <Sidebar crashes={crashes} setFiltered={setFiltered} /> */}
       <div className="relative h-full w-full">
+        <div className="absolute top-1/2 left-4 z-1000 p-0">
+          <Modal
+            crashes={crashes}
+            filtered={filtered}
+            setFiltered={setFiltered}
+          />
+        </div>
         <div className="absolute bottom-4 left-4 z-1000 p-0 shadow">
           <Legend />
         </div>
