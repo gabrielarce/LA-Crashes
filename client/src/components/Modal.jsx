@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Filter from './Filter';
+import { AiFillCloseSquare } from 'react-icons/ai';
 import { FcFilledFilter } from 'react-icons/fc';
 import { CiFilter } from 'react-icons/ci';
 
@@ -34,10 +35,10 @@ function Modal({ crashes, filtered, setFiltered }) {
             closeModal={closeModal}
           />
           <button
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            className="bg-red-500 text-white px-2 py-0 rounded hover:bg-red-600 hover:text-black absolute top-4 right-4"
             onClick={closeModal}
           >
-            Close
+            X
           </button>
         </div>
       )}
