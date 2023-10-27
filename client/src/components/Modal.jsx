@@ -24,7 +24,6 @@ function Modal({ crashes, filtered, setFiltered }) {
           onClick={closeModal}
         ></div>
       )}
-
       {/* Modal */}
       {isOpen && (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white w-1/2 rounded-lg p-6 z-1000">
@@ -42,7 +41,6 @@ function Modal({ crashes, filtered, setFiltered }) {
           </button>
         </div>
       )}
-
       {/* Open Modal Button */}
       <button
         className="bg-black text-white px-4 py-2 rounded hover:bg-slate-700 flex flex-col justify-center align-middle"
@@ -50,6 +48,7 @@ function Modal({ crashes, filtered, setFiltered }) {
       >
         Filter
         {filtered.length !== crashes.length ? <FcFilledFilter /> : <CiFilter />}
+        {filtered.length}
       </button>
     </div>
   );

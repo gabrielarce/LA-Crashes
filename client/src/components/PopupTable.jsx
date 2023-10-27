@@ -1,7 +1,7 @@
 import React from 'react';
 
 const dayOfWeek = (day) => {
-  switch (day) {
+  switch (Number(day)) {
     case 1:
       return 'Monday';
     case 2:
@@ -39,6 +39,7 @@ const convertToAmPmTime = (militaryTime) => {
 const PopupTable = ({ data }) => {
   return (
     <div className="max-w-md mx-auto ">
+      {/* Date */}
       <div className="my-0 flex justify-between">
         <span className="text-lg font-semibold">Crash Date: </span>
         <span className="text-lg font-normal ml-3">
@@ -46,6 +47,7 @@ const PopupTable = ({ data }) => {
           {data.COLLISION_DATE.split('T')[0]}{' '}
         </span>
       </div>
+      {/* Time */}
       <div className="my-1 flex justify-between">
         <span className="text-lg font-semibold my-0">Time: </span>
         <span className="text-lg font-normal">
@@ -53,6 +55,7 @@ const PopupTable = ({ data }) => {
           {convertToAmPmTime(data.collision_time)}{' '}
         </span>
       </div>
+      {/* Day */}
       <div className="my-1 flex justify-between">
         <span className="text-lg font-semibold my-0">Day of Week: </span>
         <span className="text-lg font-normal ml-3">
@@ -60,7 +63,20 @@ const PopupTable = ({ data }) => {
           {dayOfWeek(data.day_of_week)}{' '}
         </span>
       </div>
-
+      {/* Number Killed */}
+      <div className="my-1 flex justify-between">
+        <span className="text-lg font-semibold my-0">Number Killed: </span>
+        <span className="text-lg font-normal ml-3"> {data.number_killed} </span>
+      </div>
+      {/* Number Injured */}
+      <div className="my-1 flex justify-between">
+        <span className="text-lg font-semibold my-0">Number Injured: </span>
+        <span className="text-lg font-normal ml-3">
+          {' '}
+          {data.number_injured}{' '}
+        </span>
+      </div>
+      {/* streetview  */}
       <div className="my-1 flex justify-between">
         <span className="text-base  my-0">
           <a

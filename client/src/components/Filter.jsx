@@ -143,9 +143,8 @@ function DataFilter({ crashes, filtered, setFiltered, closeModal }) {
           ((formData[key] !== null || !formData[key] || formData[key] !== '') &&
             item[key] !== formData[key]) ||
           item[key] === null
-        ) {
+        )
           return false;
-        }
       }
       return true;
     });
@@ -187,6 +186,7 @@ function DataFilter({ crashes, filtered, setFiltered, closeModal }) {
             name="alcohol_involved"
             checked={formData?.alcohol_involved}
             onChange={handleChange}
+            disabled={crashes.length === filtered.length ? false : true}
           />
         </div>
         <div className="w-full sm:w-1/2 my-1">
@@ -194,8 +194,9 @@ function DataFilter({ crashes, filtered, setFiltered, closeModal }) {
           <input
             type="checkbox"
             name="bicycle_accident"
-            value={formData?.bicycle_accident}
+            checked={formData?.bicycle_accident}
             onChange={handleChange}
+            disabled={crashes.length === filtered.length ? false : true}
           />
         </div>
         <div className="w-full sm:w-1/2 my-1">
@@ -205,6 +206,7 @@ function DataFilter({ crashes, filtered, setFiltered, closeModal }) {
             name="motorcycle_accident"
             checked={formData?.motorcycle_accident}
             onChange={handleChange}
+            disabled={crashes.length === filtered.length ? false : true}
           />
         </div>
         <div className="w-full sm:w-1/2 my-1">
@@ -214,6 +216,7 @@ function DataFilter({ crashes, filtered, setFiltered, closeModal }) {
             name="pedestrian_accident"
             checked={formData?.pedestrian_accident}
             onChange={handleChange}
+            disabled={crashes.length === filtered.length ? false : true}
           />
         </div>
         <div className="w-full sm:w-1/2 my-1">
@@ -223,6 +226,7 @@ function DataFilter({ crashes, filtered, setFiltered, closeModal }) {
             name="state_hwy_ind"
             checked={formData?.state_hwy_ind}
             onChange={handleChange}
+            disabled={crashes.length === filtered.length ? false : true}
           />
         </div>
         <div className="w-full sm:w-1/2 my-1">
@@ -232,6 +236,7 @@ function DataFilter({ crashes, filtered, setFiltered, closeModal }) {
             id="day_of_week"
             value={formData.day_of_week}
             onChange={handleChange}
+            disabled={crashes.length === filtered.length ? false : true}
           >
             <option value="">Select a day</option>
             <option value="1">Monday</option>
@@ -244,12 +249,16 @@ function DataFilter({ crashes, filtered, setFiltered, closeModal }) {
           </select>
         </div>
 
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          type="submit"
-        >
-          Apply Filter
-        </button>
+        {crashes.length === filtered.length ? (
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            type="submit"
+          >
+            Apply Filter
+          </button>
+        ) : (
+          false
+        )}
         <button
           className=" text-black  hover:text-red-600 ml-2"
           type="button"
