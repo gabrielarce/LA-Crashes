@@ -19,9 +19,6 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 app.get('/api', async (req, res) => {
   try {
     let results = await Crash.find({
-      // NUMBER_KILLED: {
-      //   $gte: 1,
-      // },
       collision_severity: {
         $in: [1, 2],
       },
