@@ -1,15 +1,13 @@
-const pgp = require('pg-promise')();
+const mongoose = require('mongoose');
 
-console.log('db config file loaded');
-
-const connectionOptions = {
-  host: 'localhost',
-  port: 5432,
-  database: 'postgres',
-  user: 'postgres',
-  password: process.env.POSTGRES_DB_PW,
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.DB_STRING, {
+      dbName: 'LA-Crashes-2022',
+    });
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
 };
-
-const db = pgp(connectionOptions);
-
-module.exports = db;
+module.exports = connectDB;
