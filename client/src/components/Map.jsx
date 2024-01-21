@@ -52,7 +52,6 @@ function Map() {
 
   return (
     <div className="relative h-full w-full">
-      {/* <Sidebar crashes={crashes} setFiltered={setFiltered} /> */}
       <div className="relative h-full w-full">
         <div className="absolute top-1/2 left-4 z-1000 p-0">
           <Modal
