@@ -16,6 +16,10 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 // const routes = require('/routes');
 // app.use('/api', routes);
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build'));
+});
+
 app.get('/api', async (req, res) => {
   try {
     let results = await Crash.find({
